@@ -1,0 +1,149 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-heading: 'Barlow Condensed', sans-serif;
+    --font-body: 'Barlow', sans-serif;
+    --font-script: 'Kaushan Script', cursive;
+  }
+}
+
+body {
+  font-family: 'Barlow', sans-serif;
+  background-color: #0A0B0D;
+  color: #FFFFFF;
+}
+
+/* Tipografia Oficial GL Sports */
+.font-sport, .font-condensed {
+  font-family: 'Barlow Condensed', sans-serif;
+  letter-spacing: -0.01em;
+}
+
+.font-barlow {
+  font-family: 'Barlow', sans-serif;
+}
+
+.font-script {
+  font-family: 'Kaushan Script', cursive;
+}
+
+/* Espaçamento largo de rótulos e menus (0.25em) */
+.tracking-menu {
+  letter-spacing: 0.25em;
+}
+
+/* Faixa Tricolor da Marca: Verde -> Azul -> Laranja */
+.tricolor-stripe {
+  height: 3px;
+  width: 120px;
+  background: linear-gradient(90deg, #58E707 0%, #026FF6 50%, #FC6602 100%);
+  border-radius: 9999px;
+}
+
+.tricolor-border-bottom {
+  border-bottom: 3px solid;
+  border-image: linear-gradient(90deg, #58E707 0%, #026FF6 50%, #FC6602 100%) 1;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0A0B0D;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1D2026;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #58E707;
+}
+
+/* Glows oficiais */
+.glow-verde {
+  box-shadow: 0 0 24px rgba(88, 231, 7, 0.4);
+}
+
+.glow-azul {
+  box-shadow: 0 0 24px rgba(2, 111, 246, 0.35);
+}
+
+.glow-ciano {
+  box-shadow: 0 0 30px rgba(16, 198, 238, 0.25);
+}
+
+/* Botões oficiais GL Sports */
+.btn-primary-verde {
+  background-color: #58E707;
+  color: #0A0B0D;
+  font-weight: 800;
+  text-transform: uppercase;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-primary-verde:hover {
+  background-color: #69f219;
+  box-shadow: 0 0 24px rgba(88, 231, 7, 0.4);
+  transform: translateY(-1px);
+}
+
+.btn-secondary-azul {
+  border: 1.5px solid #026FF6;
+  color: #FFFFFF;
+  font-weight: 700;
+  background-color: transparent;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-secondary-azul:hover {
+  background-color: rgba(2, 111, 246, 0.15);
+  box-shadow: 0 0 20px rgba(2, 111, 246, 0.3);
+  transform: translateY(-1px);
+}
+
+/* Animação de Letreiro Infinito (Marquee Contínuo para a Esquerda) */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Proteção contra download, cópia e arrasto de imagens */
+img, .protected-image {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+  -webkit-touch-callout: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Suporte a prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

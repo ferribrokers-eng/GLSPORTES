@@ -1,0 +1,30 @@
+GL SPORTS - GUIA DE IMAGENS DO BANNER PRINCIPAL (HERO SLIDER)
+=============================================================
+
+Tamanho e Especificações Recomendadas para as Imagens:
+------------------------------------------------------
+1. Proporção: 16:9 (Widescreen)
+2. Resolução Ideal: 1920 x 1080 pixels (Full HD) ou 2560 x 1440 pixels (2K)
+3. Resolução Mínima Aceitável: 1600 x 900 pixels
+4. Peso Recomendado do Arquivo: Entre 150 KB e 350 KB (formato WebP ou JPG otimizado)
+5. Enquadramento e Foco:
+   - Posicione o foco visual (jogadores, estádio, artes, eventos) no LADO DIREITO ou CENTRO-DIREITA da imagem.
+   - O lado esquerdo possui um degradê escuro inteligente para que os títulos, botões e selos da GL Sports fiquem 100% nítidos e legíveis em qualquer tela.
+
+Como usar imagens locais do seu computador:
+-------------------------------------------
+1. Coloque seus arquivos dentro desta pasta (`public/hero/`):
+   - Exemplo: `public/hero/slide-referencia.webp`
+   - Exemplo: `public/hero/slide-futebol.webp`
+   - Exemplo: `public/hero/slide-ciclismo.webp`
+   - Exemplo: `public/hero/slide-jiujitsu.webp`
+   - Exemplo: `public/hero/slide-volei-praia.webp`
+   - Exemplo: `public/hero/slide-beach-tennis.webp`
+   - Exemplo: `public/hero/slide-abadas.webp`
+
+2. No arquivo `src/config.ts`, no array `heroSlides`, aponte para:
+   - `bgImage: '/hero/slide-referencia.webp'`
+   - `bgImage: '/hero/slide-futebol.webp'`
+   - etc.
+
+Ou você pode utilizar qualquer link/URL direta da internet!
