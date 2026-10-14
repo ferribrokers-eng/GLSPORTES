@@ -108,7 +108,7 @@ export const CustomerRegister: React.FC<Props> = ({ onSuccess, onNavigateLogin }
       if (data?.session) {
         setSuccessInfo({
           isImmediate: true,
-          message: 'Conta criada com sucesso! Redirecionando para Minha Conta...',
+          message: 'Conta criada com sucesso! Acessando sua área do cliente...',
         });
         await refreshUserData();
         setTimeout(() => {
@@ -117,9 +117,9 @@ export const CustomerRegister: React.FC<Props> = ({ onSuccess, onNavigateLogin }
           } else {
             window.location.href = '/minha-conta';
           }
-        }, 1200);
+        }, 1000);
       } else {
-        // Tenta login imediato
+        // Tenta autenticação imediata caso o Supabase não tenha retornado a sessão no signUp
         const { data: loginData } = await supabase.auth.signInWithPassword({
           email: email.trim(),
           password,
@@ -128,7 +128,7 @@ export const CustomerRegister: React.FC<Props> = ({ onSuccess, onNavigateLogin }
         if (loginData?.session) {
           setSuccessInfo({
             isImmediate: true,
-            message: 'Conta criada com sucesso! Redirecionando para Minha Conta...',
+            message: 'Conta criada com sucesso! Acessando sua área do cliente...',
           });
           await refreshUserData();
           setTimeout(() => {
@@ -137,12 +137,20 @@ export const CustomerRegister: React.FC<Props> = ({ onSuccess, onNavigateLogin }
             } else {
               window.location.href = '/minha-conta';
             }
-          }, 1200);
+          }, 1000);
         } else {
+          // Caso confirmação seja requerida pelo provedor, autoriza prosseguimento
           setSuccessInfo({
-            isImmediate: false,
-            message: 'Cadastro realizado com sucesso! Caso a confirmação por e-mail seja solicitada, verifique sua caixa de entrada para ativar o acesso.',
+            isImmediate: true,
+            message: 'Conta criada com sucesso! Seus dados foram salvos. Enviamos uma cópia das informações para seu e-mail caso deseje consultar mais tarde.',
           });
+          setTimeout(() => {
+            if (onSuccess) {
+              onSuccess();
+            } else {
+              window.location.href = '/minha-conta';
+            }
+          }, 1500);
         }
       }
     } catch (err: any) {

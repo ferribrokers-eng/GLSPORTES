@@ -101,7 +101,7 @@ export const CONFIG = {
       subtitle: 'Artes em 300 DPI vetorizadas prontas para sublimação total. Uniformes de futebol, ciclismo, vôlei de praia, beach tennis, artes marciais e abadás.',
       category: 'futebol',
       accentColor: '#58E707', // Verde Oficial
-      bgImage: 'https://images.unsplash.com/photo-1518609878373-06d740f60d8b?auto=format&fit=crop&w=1920&q=80',
+      bgImage: '/hero/slide-referencia.jpg',
       objectPositionDesktop: 'center right',
       objectPositionMobile: 'center center', // Conforme solicitado: a primeira mantém o enquadramento mobile
     },
@@ -113,7 +113,7 @@ export const CONFIG = {
       subtitle: 'Mais de 2.000 modelos profissionais em alta resolução prontos para sublimar. Vista seu time com a mesma qualidade dos clubes de elite.',
       category: 'futebol',
       accentColor: '#026FF6', // Azul Oficial
-      bgImage: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=1920&q=80',
+      bgImage: '/hero/slide-futebol.jpg',
       objectPositionDesktop: 'right top',
       objectPositionMobile: 'center top', // Foco nas pessoas, uniformes e cabeças sem corte
     },
@@ -125,7 +125,7 @@ export const CONFIG = {
       subtitle: 'Modelos de alta tecnologia para sua equipe de ciclismo, pelotão, grupos de pedal e mountain bike. Tecidos com proteção UV50+, zíper inteligente e secagem rápida.',
       category: 'esportes',
       accentColor: '#FC6602', // Laranja Oficial
-      bgImage: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1920&q=80',
+      bgImage: '/hero/slide-ciclismo.jpg',
       objectPositionDesktop: '85% top', // Ciclistas alinhados à direita do topo para baixo
       objectPositionMobile: 'center top', // No mobile: foco nos ciclistas e camisas, cabeças 100% visíveis
     },
@@ -137,7 +137,7 @@ export const CONFIG = {
       subtitle: 'Modelos exclusivos de rash guards, bermudas fight wear e uniformes personalizados em 300 DPI para academias, equipes de jiu-jitsu, muay thai e MMA com máxima resistência.',
       category: 'artes-marciais',
       accentColor: '#FC6602', // Laranja Oficial
-      bgImage: 'https://images.unsplash.com/photo-1555597673-b21d5c935865?auto=format&fit=crop&w=1920&q=80',
+      bgImage: '/hero/slide-jiujitsu.jpg',
       objectPositionDesktop: 'right top',
       objectPositionMobile: 'center top',
     },
@@ -149,7 +149,7 @@ export const CONFIG = {
       subtitle: 'Regatas, tops e bermudas ultra leves com proteção solar UV50+ e tecnologia antitranspirante. Estampas vibrantes para o seu time de vôlei de praia, duplas e torneios de areia.',
       category: 'esportes',
       accentColor: '#026FF6', // Azul Oficial
-      bgImage: 'https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?auto=format&fit=crop&w=1920&q=80',
+      bgImage: '/hero/slide-volei-praia.jpg',
       objectPositionDesktop: 'right top',
       objectPositionMobile: 'center top',
     },
@@ -161,7 +161,7 @@ export const CONFIG = {
       subtitle: 'Conforto e liberdade total de movimento para sua arena, duplas e torneios. Estampas exclusivas em tecido Dry Fit tecnológico com proteção solar e secagem rápida.',
       category: 'esportes',
       accentColor: '#58E707', // Verde Oficial
-      bgImage: 'https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?auto=format&fit=crop&w=1920&q=80',
+      bgImage: '/hero/slide-beach-tennis.jpg',
       objectPositionDesktop: 'right top',
       objectPositionMobile: 'center top',
     },
@@ -173,7 +173,7 @@ export const CONFIG = {
       subtitle: 'Produza seus abadás de micaretas, confraternizações e eventos com entrega rápida, tecidos leves e cores vibrantes.',
       category: 'abadas',
       accentColor: '#58E707', // Verde Oficial
-      bgImage: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1920&q=80',
+      bgImage: '/hero/slide-abadas.jpg',
       objectPositionDesktop: 'right top',
       objectPositionMobile: 'center top',
     },

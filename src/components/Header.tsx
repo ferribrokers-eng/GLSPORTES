@@ -82,20 +82,22 @@ export const Header: React.FC<HeaderProps> = ({
 
   return (
     <header className="sticky top-0 z-40 w-full transition-all duration-300">
-      {/* Top Banner Rotativo Contínuo (Marquee Infinito para a Esquerda) - Fixo no Desktop e Mobile */}
-      <div className="w-full bg-[#0A0B0D] border-b border-[#1D2026] overflow-hidden py-1.5 sm:py-2 select-none relative z-50">
+      {/* Top Banner Rotativo Contínuo - No desktop mantém tamanho normal padrão, no mobile dá o destaque desejado */}
+      <div className="w-full bg-[#0A0B0D] border-b border-[#1D2026] overflow-hidden py-2 sm:py-1.5 select-none relative z-50">
         <div className="animate-marquee flex items-center">
           {[1, 2].map((groupKey) => (
             <div
               key={groupKey}
-              className="flex items-center gap-6 sm:gap-8 whitespace-nowrap text-[11px] sm:text-xs uppercase font-bold tracking-wider pr-6 sm:pr-8"
+              className="flex items-center gap-6 sm:gap-8 whitespace-nowrap text-xs sm:text-[11px] uppercase font-bold tracking-wider pr-6 sm:pr-8"
             >
               {[1, 2].map((repeat) => (
                 <React.Fragment key={repeat}>
                   {/* 1. A Número 1 do Brasil */}
                   <span className="flex items-center gap-2 text-[#58E707] font-black">
                     <span className="w-2 h-2 rounded-full bg-[#58E707] animate-pulse" />
-                    <span>A NÚMERO 1 DO BRASIL EM VESTUÁRIO ESPORTIVO E SUBLIMAÇÃO</span>
+                    <span className="tracking-wide">
+                      A NÚMERO 1 DO BRASIL EM VESTUÁRIO ESPORTIVO E SUBLIMAÇÃO
+                    </span>
                   </span>
 
                   <span className="text-[#323742] font-bold">•</span>
@@ -109,7 +111,7 @@ export const Header: React.FC<HeaderProps> = ({
                   <span className="text-[#323742] font-bold">•</span>
 
                   {/* 3. Times e equipes de todo o Brasil usam a nossa qualidade */}
-                  <span className="text-[#FC6602] font-black">
+                  <span className="text-[#FC6602] font-black tracking-wide">
                     TIMES E EQUIPES DE TODO O BRASIL USAM A NOSSA QUALIDADE
                   </span>
 
@@ -124,36 +126,36 @@ export const Header: React.FC<HeaderProps> = ({
       {/* Main Header em Grafite Translúcido com Backdrop Blur */}
       <div
         className={`w-full transition-all duration-300 bg-[#14161A]/95 backdrop-blur-md ${
-          isScrolled ? 'py-2.5 shadow-2xl' : 'py-3.5'
+          isScrolled ? 'py-2 sm:py-2.5 shadow-2xl' : 'py-2 sm:py-3.5'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
+        <div className="max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8 flex items-center justify-between gap-2 sm:gap-4">
           
-          {/* Esquerda: Mobile Menu + Logo Oficial GL Sports (44 a 56 px) */}
-          <div className="flex items-center gap-3">
+          {/* Esquerda: Mobile Menu + Logo Oficial GL Sports (Menorzinha apenas no mobile: h-8, no desktop h-11 sm:h-12) */}
+          <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
             <button
               onClick={onOpenMobileMenu}
               aria-label="Abrir menu de categorias"
-              className="lg:hidden p-2 text-[#A7ADB5] hover:text-white hover:bg-[#1D2026] rounded-xl transition-colors cursor-pointer"
+              className="lg:hidden p-1.5 text-[#A7ADB5] hover:text-white hover:bg-[#1D2026] rounded-xl transition-colors cursor-pointer"
             >
-              <Menu className="w-6 h-6" />
+              <Menu className="w-5 h-5 sm:w-6 sm:h-6" />
             </button>
 
             <button
               onClick={onNavigateHome}
-              className="flex items-center gap-2 group text-left cursor-pointer"
+              className="flex items-center gap-1.5 group text-left cursor-pointer"
               title="GL Sports - Página Inicial"
             >
               <img
                 src={CONFIG.logoUrl}
                 alt="GL Sports"
-                className="h-11 sm:h-12 w-auto object-contain drop-shadow-[0_0_15px_rgba(88,231,7,0.3)] transition-transform group-hover:scale-105"
+                className="h-8 sm:h-12 w-auto object-contain drop-shadow-[0_0_15px_rgba(88,231,7,0.3)] transition-transform group-hover:scale-105"
               />
             </button>
           </div>
 
-          {/* Menus Principais */}
-          <nav className="hidden xl:flex items-center gap-6">
+          {/* Menus Principais (Desktop intacto) */}
+          <nav className="hidden xl:flex items-center gap-6 shrink-0">
             <button
               onClick={onNavigateHome}
               className="text-xs font-semibold text-white hover:text-[#58E707] uppercase tracking-menu transition-colors py-2 cursor-pointer"
@@ -197,24 +199,24 @@ export const Header: React.FC<HeaderProps> = ({
             </button>
           </nav>
 
-          {/* Centro: Barra de Busca em Destaque */}
-          <div className="flex-1 max-w-md relative hidden md:block">
+          {/* Centro: Barra de Busca (Desktop com largura normal original, Mobile compacta embutida) */}
+          <div className="flex-1 max-w-md relative min-w-0 mx-1 sm:mx-0">
             <div className="relative">
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onFocus={() => setIsSearchFocused(true)}
-                placeholder="Buscar nas mais de 2.100 estampas (futebol, interclasse, abadás)..."
-                className="w-full bg-[#0A0B0D] text-white placeholder-[#A7ADB5]/60 pl-10 pr-4 py-2.5 rounded-xl border border-[#1D2026] focus:border-[#58E707] focus:ring-2 focus:ring-[#58E707]/20 focus:outline-none text-xs sm:text-sm transition-all shadow-inner"
+                placeholder="Buscar nas mais de 2.100 estampas..."
+                className="w-full bg-[#0A0B0D] text-white placeholder-[#A7ADB5]/60 pl-8 sm:pl-10 pr-7 sm:pr-8 py-1.5 sm:py-2.5 rounded-xl border border-[#1D2026] focus:border-[#58E707] focus:ring-2 focus:ring-[#58E707]/20 focus:outline-none text-[11px] sm:text-sm transition-all shadow-inner"
               />
-              <Search className="w-4 h-4 text-[#A7ADB5] absolute left-3.5 top-3.5 pointer-events-none" />
+              <Search className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#A7ADB5] absolute left-2.5 sm:left-3.5 top-2.5 sm:top-3.5 pointer-events-none" />
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery('')}
-                  className="absolute right-3 top-3 text-[#A7ADB5] hover:text-white cursor-pointer"
+                  className="absolute right-2 sm:right-3 top-2 sm:top-3 text-[#A7ADB5] hover:text-white cursor-pointer"
                 >
-                  <X className="w-4 h-4" />
+                  <X className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 </button>
               )}
             </div>
@@ -240,9 +242,9 @@ export const Header: React.FC<HeaderProps> = ({
                           setIsSearchFocused(false);
                           setSearchQuery('');
                         }}
-                        className="w-full p-3 flex items-center gap-3.5 hover:bg-[#1D2026]/60 transition-colors text-left group cursor-pointer"
+                        className="w-full p-2.5 sm:p-3 flex items-center gap-2.5 sm:gap-3.5 hover:bg-[#1D2026]/60 transition-colors text-left group cursor-pointer"
                       >
-                        <div className="w-12 h-12 rounded-lg bg-[#0A0B0D] overflow-hidden flex-shrink-0 border border-[#1D2026] aspect-square">
+                        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-[#0A0B0D] overflow-hidden shrink-0 border border-[#1D2026] aspect-square">
                           <img
                             src={product.imagens[0]}
                             alt={product.nome}
@@ -251,19 +253,19 @@ export const Header: React.FC<HeaderProps> = ({
                           />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="text-sm font-semibold text-white truncate group-hover:text-[#58E707] transition-colors">
+                          <p className="text-xs sm:text-sm font-semibold text-white truncate group-hover:text-[#58E707] transition-colors">
                             {product.displayName || product.nome}
                           </p>
-                          <div className="flex items-center gap-2 mt-0.5 text-xs text-[#A7ADB5]">
-                            <span className="bg-[#0A0B0D] px-2 py-0.5 rounded text-[11px] border border-[#1D2026]">
+                          <div className="flex items-center gap-1.5 mt-0.5 text-[10px] sm:text-xs text-[#A7ADB5]">
+                            <span className="bg-[#0A0B0D] px-1.5 py-0.5 rounded text-[10px] border border-[#1D2026]">
                               {product.categoria}
                             </span>
                             <span>•</span>
                             <span>ID #{product.id}</span>
                           </div>
                         </div>
-                        <div className="text-right flex-shrink-0">
-                          <span className="font-extrabold text-[#58E707] text-sm">
+                        <div className="text-right shrink-0">
+                          <span className="font-extrabold text-[#58E707] text-xs sm:text-sm">
                             {formatPrice(product.preco)}
                           </span>
                         </div>
@@ -271,7 +273,7 @@ export const Header: React.FC<HeaderProps> = ({
                     ))}
                   </div>
                 ) : (
-                  <div className="p-6 text-center text-sm text-[#A7ADB5]">
+                  <div className="p-5 text-center text-xs text-[#A7ADB5]">
                     Nenhuma estampa encontrada para "{searchQuery}".
                   </div>
                 )}
@@ -279,9 +281,9 @@ export const Header: React.FC<HeaderProps> = ({
             )}
           </div>
 
-          {/* Direita: WhatsApp Oficial, Favoritos e Carrinho */}
-          <div className="flex items-center gap-2 sm:gap-3">
-            {/* Botão de WhatsApp Oficial Verde */}
+          {/* Direita: WhatsApp Oficial, Área do Cliente (Logar) e Carrinho (Coração oculto no mobile) */}
+          <div className="flex items-center gap-1 sm:gap-3 shrink-0">
+            {/* Botão de WhatsApp Oficial Verde (Desktop) */}
             <a
               href={CONFIG.whatsappUrl}
               target="_blank"
@@ -293,21 +295,21 @@ export const Header: React.FC<HeaderProps> = ({
               <span>WhatsApp</span>
             </a>
 
-            {/* Área do Cliente */}
+            {/* Área do Cliente / Entrar */}
             <button
               onClick={onNavigateCustomerArea}
               aria-label="Área do Cliente"
-              className="p-2.5 text-[#A7ADB5] hover:text-[#58E707] hover:bg-[#1D2026] rounded-xl transition-colors cursor-pointer"
+              className="p-1.5 sm:p-2.5 text-[#A7ADB5] hover:text-[#58E707] hover:bg-[#1D2026] rounded-xl transition-colors cursor-pointer"
               title="Área do Cliente / Entrar"
             >
               <User className="w-5 h-5" />
             </button>
 
-            {/* Favoritos */}
+            {/* Favoritos (Oculto no mobile conforme solicitado) */}
             <button
               onClick={onNavigateFavorites}
               aria-label="Ver produtos favoritos"
-              className="p-2.5 text-[#A7ADB5] hover:text-white hover:bg-[#1D2026] rounded-xl transition-colors relative cursor-pointer"
+              className="hidden md:flex p-2.5 text-[#A7ADB5] hover:text-white hover:bg-[#1D2026] rounded-xl transition-colors relative cursor-pointer"
             >
               <Heart className="w-5 h-5" />
               {totalFavorites > 0 && (
@@ -321,7 +323,7 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               onClick={() => setIsCartOpen(true)}
               aria-label="Abrir carrinho de compras"
-              className="flex items-center gap-2 p-2 sm:px-3 sm:py-2 bg-[#0A0B0D] hover:bg-[#1D2026] border border-[#1D2026] hover:border-[#58E707] rounded-xl transition-all shadow-md text-white group cursor-pointer"
+              className="flex items-center gap-1.5 p-1.5 sm:px-3 sm:py-2 bg-[#0A0B0D] hover:bg-[#1D2026] border border-[#1D2026] hover:border-[#58E707] rounded-xl transition-all shadow-md text-white group cursor-pointer"
             >
               <div className="relative">
                 <ShoppingBag className="w-5 h-5 text-[#58E707] group-hover:scale-110 transition-transform" />

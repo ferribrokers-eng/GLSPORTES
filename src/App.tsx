@@ -591,8 +591,6 @@ function MainAppContent() {
                   }}
                 />
 
-                <BenefitsBar />
-
                 <div id="categorias-populares">
                   <GroupsGrid 
                     groups={groups}
@@ -764,6 +762,10 @@ function MainAppContent() {
         onNavigateLogin={() => {
           setViewMode('login');
           window.history.pushState({}, '', '/entrar');
+        }}
+        onNavigateRegister={() => {
+          setViewMode('register');
+          window.history.pushState({}, '', '/criar-conta');
         }}
       />
 

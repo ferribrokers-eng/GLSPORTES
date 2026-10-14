@@ -11,7 +11,7 @@ import { UniformListSpreadsheet } from './UniformListSpreadsheet';
 import { 
   ArrowLeft, Check, CheckCircle2, AlertCircle, Clock, 
   Upload, Copy, ExternalLink, MessageSquare, ShieldCheck, 
-  Truck, Eye, Loader2, Sparkles 
+  Truck, Eye, Loader2, Sparkles, PhoneCall 
 } from 'lucide-react';
 
 interface Props {
@@ -697,6 +697,35 @@ export const CustomerOrderDetail: React.FC<Props> = ({ orderId, onBack }) => {
               </div>
             </div>
           ))}
+        </div>
+      </div>
+
+      {/* CANAL DIRETO COM A EQUIPE VIA WHATSAPP (APENAS APÓS CONTA CRIADA E PEDIDO ABERTO) */}
+      <div className="bg-[#14161A] border border-[#1D2026] rounded-3xl p-6 space-y-3 shadow-xl">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="space-y-1">
+            <span className="text-[11px] font-black uppercase text-[#58E707] tracking-wider">
+              Suporte & Atendimento ao Cliente
+            </span>
+            <h4 className="text-base font-bold text-white">
+              Precisa falar com a equipe sobre o Pedido #{pedido.numero}?
+            </h4>
+            <p className="text-xs text-[#A7ADB5]">
+              Tire dúvidas sobre prazos, tamanhos especiais ou ajuste de arte diretamente com a diretoria de confecção.
+            </p>
+          </div>
+
+          <a
+            href={`https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(
+              `Olá equipe GL Sports! Sou cliente da conta ${cliente?.nome || 'cadastrada'} e gostaria de falar sobre o meu Pedido #${pedido.numero}.`
+            )}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="py-3 px-5 bg-[#58E707] hover:bg-[#69f219] text-[#0A0B0D] font-black uppercase text-xs rounded-xl flex items-center justify-center gap-2 transition-all shadow-[0_0_20px_rgba(88,231,7,0.3)] shrink-0 cursor-pointer"
+          >
+            <PhoneCall className="w-4 h-4 stroke-[2.5]" />
+            <span>Falar com a Equipe no WhatsApp</span>
+          </a>
         </div>
       </div>
 

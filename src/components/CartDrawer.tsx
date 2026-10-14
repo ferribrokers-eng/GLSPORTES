@@ -17,6 +17,7 @@ interface CartDrawerProps {
   onExploreCatalog?: () => void;
   onNavigateOrder?: (orderId: string) => void;
   onNavigateLogin?: () => void;
+  onNavigateRegister?: () => void;
 }
 
 const TIPOS_PECA = [
@@ -47,7 +48,8 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
   onSelectProduct, 
   onExploreCatalog, 
   onNavigateOrder,
-  onNavigateLogin 
+  onNavigateLogin,
+  onNavigateRegister
 }) => {
   const { 
     cart, removeFromCart, updateQuantity, updateItemConfig, 
@@ -410,46 +412,28 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                 </div>
               </div>
 
-              {/* Se o Supabase estiver configurado, oferece "Enviar Pedido pelo Site" */}
-              {isSupabaseConfigured ? (
-                <div className="space-y-2">
-                  <button
-                    onClick={handleEnviarPedidoSite}
-                    disabled={isSubmitting}
-                    className="w-full py-4 px-4 bg-[#58E707] hover:bg-[#69f219] text-[#0A0B0D] font-black text-sm uppercase rounded-xl flex items-center justify-center gap-2 shadow-[0_0_24px_rgba(88,231,7,0.4)] transition-all hover:scale-[1.01] cursor-pointer"
-                  >
-                    {isSubmitting ? (
-                      <Loader2 className="w-5 h-5 animate-spin" />
-                    ) : (
-                      <>
-                        <Send className="w-4 h-4 stroke-[2.5]" />
-                        <span>Enviar Pedido para Produção</span>
-                      </>
-                    )}
-                  </button>
-
-                  <a
-                    href={whatsappUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full py-2.5 px-3 bg-[#14161A] hover:bg-[#1D2026] border border-[#1D2026] text-white hover:text-[#58E707] font-bold text-xs uppercase rounded-xl flex items-center justify-center gap-2 transition-all cursor-pointer"
-                  >
-                    <PhoneCall className="w-3.5 h-3.5 text-[#58E707]" />
-                    <span>Ou Finalizar pelo WhatsApp</span>
-                  </a>
-                </div>
-              ) : (
-                /* Modo de Preparação: Finaliza diretamente pelo WhatsApp */
-                <a
-                  href={whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full py-4 px-4 bg-[#58E707] hover:bg-[#69f219] text-[#0A0B0D] font-extrabold text-sm uppercase rounded-xl flex items-center justify-center gap-2 shadow-[0_0_24px_rgba(88,231,7,0.4)] transition-all hover:scale-[1.01] cursor-pointer"
+              {/* Checkout: Exige conta para capturar dados completos do cliente */}
+              <div className="space-y-2">
+                <button
+                  onClick={handleEnviarPedidoSite}
+                  disabled={isSubmitting}
+                  className="w-full py-4 px-4 bg-[#58E707] hover:bg-[#69f219] text-[#0A0B0D] font-black text-sm uppercase rounded-xl flex items-center justify-center gap-2 shadow-[0_0_24px_rgba(88,231,7,0.4)] transition-all hover:scale-[1.01] cursor-pointer"
                 >
-                  <PhoneCall className="w-4 h-4 stroke-[2.5]" />
-                  <span>Finalizar Pedido no WhatsApp</span>
-                </a>
-              )}
+                  {isSubmitting ? (
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                  ) : (
+                    <>
+                      <Send className="w-4 h-4 stroke-[2.5]" />
+                      <span>{user ? 'Enviar Pedido para Produção' : 'Criar Conta para Enviar Pedido'}</span>
+                    </>
+                  )}
+                </button>
+                {!user && (
+                  <p className="text-[11px] text-[#A7ADB5] text-center leading-relaxed">
+                    Crie sua conta para cadastrar os dados completos da sua encomenda e acompanhar orçamento e arte.
+                  </p>
+                )}
+              </div>
 
               <div className="flex items-center justify-between text-[11px] text-[#A7ADB5] pt-1">
                 <span className="flex items-center gap-1 text-white">
@@ -468,22 +452,36 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
         </div>
       </div>
 
-      {/* MODAL: Login necessário para Enviar Pedido */}
+      {/* MODAL: Criar Conta Obrigatória para Enviar Pedido */}
       {showLoginPrompt && (
         <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4">
           <div className="max-w-sm w-full bg-[#14161A] border border-[#1D2026] rounded-3xl p-6 text-center space-y-4 shadow-2xl">
-            <div className="w-12 h-12 rounded-2xl bg-[#0A0B0D] border border-[#1D2026] flex items-center justify-center mx-auto text-[#58E707]">
-              <LogIn className="w-6 h-6" />
+            <div className="w-12 h-12 rounded-2xl bg-[#0A0B0D] border border-[#58E707]/30 flex items-center justify-center mx-auto text-[#58E707] shadow-[0_0_15px_rgba(88,231,7,0.2)]">
+              <User className="w-6 h-6" />
             </div>
 
-            <h3 className="text-lg font-bold text-white uppercase font-sport">
-              Faça Login para Enviar
+            <h3 className="text-xl font-bold text-white uppercase font-sport">
+              Crie sua Conta para Continuar
             </h3>
-            <p className="text-xs text-[#A7ADB5]">
-              Para acompanhar a aprovação da arte, o orçamento e a produção, acesse sua conta ou faça um cadastro rápido.
+            <p className="text-xs text-[#A7ADB5] leading-relaxed">
+              Para prosseguir com seu pedido e registrar os dados completos da encomenda (tamanhos, cores, orçamento e arte), crie sua conta ou faça login. O acesso à sua área do cliente é liberado na hora!
             </p>
 
             <div className="pt-2 flex flex-col gap-2">
+              <button
+                onClick={() => {
+                  setShowLoginPrompt(false);
+                  setIsCartOpen(false);
+                  if (onNavigateRegister) {
+                    onNavigateRegister();
+                  } else {
+                    window.location.href = '/criar-conta';
+                  }
+                }}
+                className="w-full py-3.5 px-4 bg-[#58E707] hover:bg-[#69f219] text-[#0A0B0D] font-black uppercase rounded-xl text-xs cursor-pointer shadow-[0_0_15px_rgba(88,231,7,0.3)]"
+              >
+                Criar Conta Grátis
+              </button>
               <button
                 onClick={() => {
                   setShowLoginPrompt(false);
@@ -494,13 +492,13 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                     window.location.href = '/entrar';
                   }
                 }}
-                className="w-full py-3 px-4 bg-[#58E707] hover:bg-[#69f219] text-[#0A0B0D] font-extrabold uppercase rounded-xl text-xs cursor-pointer shadow"
+                className="w-full py-2.5 px-4 bg-[#14161A] hover:bg-[#1D2026] border border-[#1D2026] text-white hover:text-[#58E707] rounded-xl text-xs font-bold uppercase cursor-pointer"
               >
-                Entrar ou Criar Conta
+                Já Tenho Conta (Entrar)
               </button>
               <button
                 onClick={() => setShowLoginPrompt(false)}
-                className="w-full py-2.5 px-4 bg-[#0A0B0D] border border-[#1D2026] text-[#A7ADB5] rounded-xl text-xs cursor-pointer"
+                className="w-full py-2 text-[#A7ADB5] hover:text-white text-[11px] cursor-pointer"
               >
                 Voltar ao Carrinho
               </button>

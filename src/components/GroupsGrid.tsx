@@ -125,6 +125,7 @@ export const GroupsGrid: React.FC<GroupsGridProps> = ({ groups, onSelectGroup, o
                 src={image}
                 alt={cardTitle}
                 loading="eager"
+                decoding="async"
                 style={{
                   objectPosition: isPortraitFocus ? 'center 10%' : 'center center',
                 }}

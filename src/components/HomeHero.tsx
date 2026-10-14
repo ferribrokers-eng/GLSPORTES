@@ -75,6 +75,8 @@ export const HomeHero: React.FC<HomeHeroProps> = ({ onExplore }) => {
                   alt={s.title}
                   className={`w-full h-full object-cover transition-opacity duration-700 ease-out ${positionClass}`}
                   loading={idx === 0 ? "eager" : "lazy"}
+                  decoding={idx === 0 ? "sync" : "async"}
+                  fetchPriority={idx === 0 ? "high" : "low"}
                 />
               )}
               

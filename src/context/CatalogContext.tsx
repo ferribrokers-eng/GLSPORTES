@@ -35,8 +35,29 @@ export const CatalogProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const [error, setError] = useState<string | null>(null);
 
   const loadCatalog = useCallback(async () => {
-    setIsLoading(true);
-    setError(null);
+    // 0. Carregamento instantâneo via cache de sessão se já foi obtido
+    try {
+      const cachedRaw = sessionStorage.getItem('glsports_catalog_cache');
+      if (cachedRaw) {
+        const cachedData = JSON.parse(cachedRaw);
+        if (cachedData?.produtos?.length) {
+          const processed = processProductVariants(cachedData.produtos);
+          setProducts(processed);
+          setTotalCount(cachedData.total_produtos || processed.length);
+          if (cachedData.grupos) {
+            setGroups(cachedData.grupos.map((g: any) => ({
+              ...g,
+              icon: GROUP_ICONS[g.nome] || '👕',
+              isRestricted: g.nome === 'Para Estampadores',
+            })));
+          }
+          setIsLoading(false);
+          // Continua silenciosamente em background para atualizar se necessário
+        }
+      }
+    } catch {
+      // Ignora erro de cache
+    }
 
     let data: CatalogData | null = null;
 
@@ -75,6 +96,12 @@ export const CatalogProvider: React.FC<{ children: React.ReactNode }> = ({ child
     }
 
     if (data && data.produtos && Array.isArray(data.produtos)) {
+      try {
+        sessionStorage.setItem('glsports_catalog_cache', JSON.stringify(data));
+      } catch {
+        // Se exceder cota do sessionStorage, ignora sem quebrar
+      }
+
       const processed = processProductVariants(data.produtos);
       setProducts(processed);
       setTotalCount(data.total_produtos || processed.length);
@@ -89,7 +116,13 @@ export const CatalogProvider: React.FC<{ children: React.ReactNode }> = ({ child
       }
       setIsLoading(false);
     } else {
-      setError('Não foi possível carregar o catálogo');
+      // Só marca erro se não tiver carregado do cache previamente
+      setProducts((current) => {
+        if (current.length === 0) {
+          setError('Não foi possível carregar o catálogo');
+        }
+        return current;
+      });
       setIsLoading(false);
     }
   }, []);
